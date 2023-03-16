@@ -1,0 +1,48 @@
+
+Student such that change the name of student as ‘Mozart’ whose Id is 45678
+   
+     update Student set name='Mozart' where ID='45678'; 
+     
+Department such that budget of history department is 100000 and building as Taylor
+
+   update Department set building='Taylor' where dept_name='History';
+
+   update Department set budget=100000 where dept_name='History';
+   
+Instructor such that the salary of each instructor increases by 10%
+
+   update Instructor set salary=salary+(salary*10/100);
+   
+Course such that the credits of all courses under computer science department is 4
+
+   update Course set credits=4 where dept_name='Comp.Sci.';
+   
+Student such that give additional 10 points to the total credits for students who have total credits in between 20 to 50
+
+   update Student set tot_cred=tot_cred+10 where tot_cred > 20 and tot_cred < 50;
+   
+Instructor such that 5% salary raise to instructors whose salary is less than the average salary.  
+
+   set @a = (select avg(salary) from Instructor);
+
+   update Instructor set salary =  salary + (salary * 5/100) where salary < @a;
+   
+Teaches such that change the year of the course to 2010 with course id ‘CS-101’ which is under‘Fall’ semester   
+
+   update Teaches set year=2010 where course_id='CS-101' and semester='Fall';
+
+___________________________________________________________________________________________________________________________________________________________
+
+Delete the student information who have total credits is zero.
+  
+   delete from Student where tot_cred = 0;
+___________________________________________________________________________________________________________________________________________________________
+
+Delete the record from instructor whose id starts with ‘765’
+
+   delete from Instructor where ID like '765%';
+___________________________________________________________________________________________________________________________________________________________
+
+Delete all courses that have never been offered(that is do not occur in the section relation)
+
+   DELETE FROM Course where course_id NOT IN (SELECT course_id FROM Section);

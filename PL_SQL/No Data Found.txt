@@ -1,0 +1,24 @@
+DECLARE  
+   c_id customers.customer_id%type ;  
+   c_name customers.customer_name%type;  
+   c_city customers.city%type;  
+   d number; 
+BEGIN  
+ 
+   SELECT  customer_id, customer_name,city INTO  c_id, c_name,c_city  
+   FROM customers  
+   WHERE customer_id = 8;   
+        DBMS_OUTPUT.PUT_LINE ('Id: ' || c_id); 
+        DBMS_OUTPUT.PUT_LINE ('Name: '||  c_name);  
+        DBMS_OUTPUT.PUT_LINE ('City: ' || c_city);  
+ 
+EXCEPTION  
+   WHEN no_data_found THEN  
+      dbms_output.put_line('No such customer!');  
+   WHEN too_many_rows THEN  
+      dbms_output.put_line('Overflow of rows');  
+   WHEN zero_divide THEN  
+      dbms_output.put_line('Arithmetic Error');  
+   WHEN value_error THEN  
+      dbms_output.put_line('False Value');  
+END;

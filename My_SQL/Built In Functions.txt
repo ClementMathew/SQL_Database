@@ -1,0 +1,39 @@
+
+A. Cos(absolute(-10))* e^2) ,print the rounded value
+
+   select ROUND(cos(radians(abs(-10) * exp(2))),2);
+____________________________________________________________________________________ 
+
+B. Log10( ((5 4)%14) ) , print the result as 2 digit in decimal part
+
+   select round(log10(sqrt(mod(pow(5,4),14))),2);
+___________________________________________________________________________________________________
+
+C. Sin(30)+tan(60), also print the sign of the resullt
+   
+   select sin(radians(30)) + tan(radians(60)), sign(sin(radians(30)) + tan(radians(60)));
+________________________________________________________________________________________________________________
+
+2. Find the greatest preceding or the least succeeding integer of 12.9
+
+   select ceiling(12.9), floor(12.9);
+__________________________________________________________________________________________________________________________________
+
+3. Display Name of instructor as Uppercase, lowercase letters, and also shows as first letter in capital in separate columns
+
+   select upper(name), lower(name), concat(upper(substring(name,1,1)), substring(name,2)) from Instructor;
+______________________________________________________________________________________________________________________________________
+
+4. Replace the '-' in Course_id with '/' and display it as new column
+
+   select replace(course_id, '-', '/') from Course;
+____________________________________________________________________________________________________________
+
+5. Display the name of instructor with department name as full name
+
+   select concat(name,' ', dept_name) from Instructor;
+_____________________________________________________________________________________________
+
+6. Display the last 3 numbers from course id
+
+   select substring(course_id,-3,3) from Course;

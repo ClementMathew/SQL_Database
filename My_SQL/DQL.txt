@@ -1,0 +1,49 @@
+  
+ 1. Retrieve the name of instructor along with department names of all instructors
+   
+     select name, dept_name from Instructor;
+___________________________________________________________________________________________________________________________________________________________
+
+ 2. Retrieve the semester names from teaches relation and avoid duplicates.
+
+      SELECT DISTINCT semester FROM Teaches;
+___________________________________________________________________________________________________________________________________________________________
+
+ 3. Retrieve the name of instructor along with 10% raise in their salary
+   
+   SELECT name,salary+(salary*10/100) FROM Instructor;
+___________________________________________________________________________________________________________________________________________________________
+
+4. Retrieve the id and name of instructor who have salary greater than 70000 and working under computer science department
+   
+   SELECT id,name FROM Instructor where salary > 70000 AND dept_name='Comp.Sci.';
+___________________________________________________________________________________________________________________________________________________________
+
+5. Retrieve the names of all instructors along with their department names and department buliding names
+   
+   SELECT name,Instructor.dept_name,building FROM Instructor RIGHT JOIN Department ON Instructor.dept_name = Department.dept_name;  
+___________________________________________________________________________________________________________________________________________________________
+
+6. Retrieve the instructor names and course identifiers for instructors in the computer science department
+     
+   SELECT name,course_id FROM Instructor RIGHT JOIN Course ON Instructor.dept_name = Course.dept_name where Instructor.dept_name = 'Comp.Sci.';
+___________________________________________________________________________________________________________________________________________________________ 
+
+7. Retrieve the details of course which title starts with ‘Intro’
+
+   select * from Course where title like 'Intro%';
+___________________________________________________________________________________________________________________________________________________________
+
+8. Retrieve the details of course which title have substring ‘Comp’
+
+   select * from Course where title like '%Comp%';
+___________________________________________________________________________________________________________________________________________________________
+
+9. Retrieve the information of students who have exaclty 3 characters in their names
+   
+   select * from Student where name like '___';
+___________________________________________________________________________________________________________________________________________________________
+
+10. Retrieve the information of Instructors who have atleast 3 characters in their names
+
+   select * from Instructor where name like '%___%';

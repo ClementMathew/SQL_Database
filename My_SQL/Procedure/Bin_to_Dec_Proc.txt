@@ -1,0 +1,18 @@
+delimiter //
+create procedure bin_to_dec(in num INT)
+begin
+declare n,rem,deci INT;
+declare base int;
+set deci = 0;
+set base = 1;
+set n = num;
+label: 
+WHILE num!=0 DO
+    SET rem = num % 10;
+	set deci = deci + rem * base;
+	set num = num/10;
+	set base = base * 2; 
+  END 
+WHILE label;
+select deci;
+end; //

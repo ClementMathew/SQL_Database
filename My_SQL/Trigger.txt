@@ -1,0 +1,37 @@
+create table cred_info(credits int);
+ 
+delimiter //
+
+create trigger update_cred
+
+ before update on Course
+
+ for each row
+
+  begin
+
+  insert into cred_info values (old.credits);
+
+ end; // 
+ 
+update Course set credits=credits+1 where dept_name='Comp.Sci.';//
+ 
+select * from cred_info;//
+ 
+create table cred_info_2(credits int);//
+ 
+create trigger update_cred_2
+
+ after update on Course
+
+   for each row
+
+   begin
+
+  insert into cred_info_2 values(new.credits);
+
+  end; // 
+ 
+update Course set credits=credits+1 where dept_name='Comp.Sci.';//
+ 
+select * from cred_info_2;//

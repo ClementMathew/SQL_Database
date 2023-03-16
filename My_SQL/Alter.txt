@@ -1,0 +1,46 @@
+a. Course such that the data type of course_id to varchar(10) [cannot be done hence convert 'credits']
+
+   alter table Course modify credits varchar(10);
+   
+b. Department to add a new column dept_no of data type number
+
+  alter table Department add column dept_no int;
+  
+c. Student such that the contents of the column name should not be NULL
+
+  alter table Student modify name varchar(20) not null;
+  
+d. Classroom such that the default value for column capacity as 50
+
+  alter table Classroom alter capacity set default 50;
+  
+e. Department such that the contents of column dept_name should be unique 
+
+  alter table Department add unique(dept_name);
+  
+f. Instructor such that the values for the column salary should be greater than 30000  [question changed]
+
+  ALTER TABLE Instructor ADD CHECK (salary>30000);
+_____________________________________________________________________________________________________________
+
+
+Remove all constraints and modifications that are given to the database
+
+   alter table Course modify credits int;
+
+   alter table Department drop column dept_no;
+
+   alter table Student modify name varchar(20);
+
+   alter table Classroom alter capacity drop default;
+
+   alter table Department drop index dept_name; [might have a different value in place of 'dept_name']
+
+   alter table Instructor drop check Instructor_chk_1; [might have a different value in place of 'Instructor_chk_1']
+
+________________________________________________________________________________________________________________________
+
+
+Change the name of table takes to subject
+
+   alter table Takes rename Subject;

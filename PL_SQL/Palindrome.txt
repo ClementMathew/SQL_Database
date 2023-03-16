@@ -1,0 +1,28 @@
+declare
+
+num number;
+rev number;
+test number;
+
+begin
+
+num:=1234;
+test:=num;
+rev:=0;
+
+while num>0 loop
+rev:=(rev*10)+mod(num,10);
+num:=floor(num/10);
+end loop;
+
+dbms_output.put_line('Reverse:' || rev);
+
+if rev=num
+then
+dbms_output.put_line('True');
+
+else
+dbms_output.put_line('False');
+
+end if;
+end;

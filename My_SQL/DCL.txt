@@ -1,0 +1,14 @@
+
+1. 
+   CREATE USER 'test'@'localhost' IDENTIFIED BY 'password';
+
+   grant select on university.Classroom to 'test'@'localhost';
+____________________________________________________________________________________
+2.
+   grant all on university.* to 'test'@'localhost';
+___________________________________________________________________________________________
+
+3.
+   revoke all on university.* from 'test'@'localhost';
+
+   revoke all on university.Classroom from 'test'@'localhost';

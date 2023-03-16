@@ -1,0 +1,40 @@
+
+1. start transaction;
+
+   update Student set name='John' where ID='44553';
+_______________________________________________________________________________
+
+2. commit;
+_______________________________________________________________________________
+
+3.
+   start transaction;
+
+   update Student set name='Peltier' where ID='44553';
+________________________________________________________________________________
+
+4. 
+   rollback;
+____________________________________________________________________________
+
+5. 
+   start transaction;
+
+   insert into Student values('66666','Diya','Comp.Sci.',23);
+
+   update Student set ID='55555' where ID='66666';
+
+   savepoint A;
+
+   update Student set name='Clement' where ID='55555';
+
+   savepoint B;
+
+   update Student set name='Brice' where ID='55555';
+_______________________________________________________________________________
+ 
+6. rollback to savepoint B;
+
+   rollback to savepoint A;
+
+   rollback;

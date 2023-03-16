@@ -1,0 +1,24 @@
+
+1. For each department, retrieve the department name, the number of instructors in the department, and their average salary.
+
+   select dept_name, count(*), avg(salary) from Instructor group by dept_name;
+___________________________________________________________________________________________________________________________________________________________
+
+2. For each course, retrieve the course_id, the semester, and the number of students who takes that course.
+
+   select course_id, semester, count(distinct ID) from Subject group by course_id,semester;
+___________________________________________________________________________________________________________________________________________________________
+
+3. For each course on which more than two students taken, retrieve the course_id, the semester and the number of students who takes that course.
+
+   select course_id, semester, count(distinct ID) from Subject group by course_id,semester having count(distinct ID) > 2;   
+__________________________________________________________________________________________________________________________________________________________________
+
+4. For each course, retrieve the course_id, the instructor name, and the number of courses taken from each department
+   
+    create view view1 as select course_id, name,dept_name from teaches, instructor where instructor.ID = teaches.ID;
+______________________________________________________________________________________________________________________________________________________
+
+5. For each department that has more than two instructors, retrieve the department name and the number of its instructors who are making more than $80,000.
+
+       select dept_name, count(*) from Instructor where salary>80000 group by dept_name having count(*) > 1;

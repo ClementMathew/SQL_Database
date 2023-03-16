@@ -1,0 +1,3 @@
+CREATE USER 'project'@'localhost' IDENTIFIED BY 'Clement@123';
+
+ GRANT ALL ON *.* TO 'project'@'localhost' WITH GRANT OPTION;

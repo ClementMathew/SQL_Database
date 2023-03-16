@@ -1,0 +1,37 @@
+declare  
+
+     mark number;  
+
+begin  
+
+    dbms_output.put_line('enter the marks: ');  
+
+   mark:= 91;  
+
+   if mark>=90 then  
+
+    dbms_output.put_line('S');  
+
+   elsif mark<=90 and mark>=85 then  
+
+    dbms_output.put_line('A+');  
+
+     elsif mark<=85 and mark>=80 then  
+
+    dbms_output.put_line('A');  
+
+      elsif mark<=80 and mark>=75 then  
+
+    dbms_output.put_line('B+');  
+
+       elsif mark<=75 and mark>=70 then  
+
+    dbms_output.put_line('B');  
+
+   else  
+
+    dbms_output.put_line('get lost');      
+    
+   end if;     
+  
+ end;

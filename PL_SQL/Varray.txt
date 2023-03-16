@@ -1,0 +1,24 @@
+DECLARE  
+
+   type namesarray IS VARRAY(5) OF VARCHAR2(10);  
+   type grades IS VARRAY(5) OF INTEGER;  
+   names namesarray;  
+   marks1 grades; 
+   marks2 grades;  
+   total integer;  
+
+BEGIN  
+
+   names := namesarray('clement', 'clem', 'cleme', 'clemen', 'clemu');  
+   marks1:= grades(98, 97, 78, 87, 92); 
+   marks2:= grades(98, 97, 78, 87, 92);  
+   total := names.count;  
+
+   dbms_output.put_line('Total '|| total || ' Students'|| chr(10));  
+
+   FOR i in 1 .. total LOOP  
+      dbms_output.put_line('Student: ' || names(i) || chr(10)|| ' sub 1:' || marks1(i) || ' ,sub 2:' || marks2(i) || chr(10)|| ' total Marks: ' || (marks1(i)+marks2(i))|| chr(10)); 
+ 
+   END LOOP;  
+
+END; 
