@@ -1,0 +1,88 @@
+describe keyspaces;
+
+tabular        system              system_traces        
+system_auth    data_endpoint_auth  system_virtual_schema
+system_schema  datastax_sla        system_views  
+
+----------------------------------------------------
+
+use tabular;
+
+--------------------------------------------------
+
+create table if not exists books(
+           ... bookid uuid,
+           ... author text,
+           ... title text,
+           ... year int,
+           ... categories set <text>,
+           ... added timestamp,
+           ... primary key(bookid)
+           ... );
+
+-------------------------------------------------------
+
+describe keyspace tabular;
+
+CREATE KEYSPACE tabular WITH replication = {'class': 'NetworkTopologyStrategy', 'asia-south1': '3'}  AND durable_writes = true;
+
+CREATE TABLE tabular.books (
+    bookid uuid PRIMARY KEY,
+    added timestamp,
+    author text,
+    categories set<text>,
+    title text,
+    year int
+) WITH additional_write_policy = '99PERCENTILE'
+    AND bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.UnifiedCompactionStrategy'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair = 'BLOCKING'
+    AND speculative_retry = '99PERCENTILE';
+
+------------------------------------------------------------------------------------------------------------------------
+
+insert into books(bookid,author,title,year,categories,added)
+           ... values(uuid(),'Clement Mathew','Wings of me',1999,{'programming','computers'},toTimeStamp(now()));
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+select * from books;
+
+ bookid                               | added                           | author         | categories                   | title       | year
+--------------------------------------+---------------------------------+----------------+------------------------------+-------------+------
+ 6ee7a562-6927-4a3a-bbe1-4028e69ce93f | 2023-04-13 15:38:23.828000+0000 | Clement Mathew | {'computers', 'programming'} | Wings of me | 1999
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+insert into books(bookid,author,title,year,categories,added) values(uuid(),'Brice Joshy','Wings of them',1998,{'architecture','computers'},toTimeStamp(now()));
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+ select * from books;
+
+ bookid                               | added                           | author         | categories                    | title         | year
+--------------------------------------+---------------------------------+----------------+-------------------------------+---------------+------
+ 825b6e69-8f47-44b0-a92b-24ef8ed103e6 | 2023-04-13 15:42:18.318000+0000 |    Brice Joshy | {'architecture', 'computers'} | Wings of them | 1998
+ 6ee7a562-6927-4a3a-bbe1-4028e69ce93f | 2023-04-13 15:38:23.828000+0000 | Clement Mathew |  {'computers', 'programming'} |   Wings of me | 1999
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+select * from books
+           ... where bookid = 825b6e69-8f47-44b0-a92b-24ef8ed103e6;
+
+ bookid                               | added                           | author      | categories                    | title         | year
+--------------------------------------+---------------------------------+-------------+-------------------------------+---------------+------
+ 825b6e69-8f47-44b0-a92b-24ef8ed103e6 | 2023-04-13 15:42:18.318000+0000 | Brice Joshy | {'architecture', 'computers'} | Wings of them | 1998
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+clear;
