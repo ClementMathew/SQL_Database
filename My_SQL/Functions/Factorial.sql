@@ -27,6 +27,6 @@ END LOOP facto;
 
 RETURN factorial;
 
-END//
+END //
 
 delimiter ;
